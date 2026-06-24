@@ -1,0 +1,148 @@
+def mostrar_menu():
+    print("==========MENU PRINCIPAL========== ")
+    print("1. Agtregar Tarea")
+    print("2. Buscar Tarea")
+    print("3. Eliminar Tarea")
+    print("4. Acctualizar Estado")
+    print("5. Mostrar Tareas")
+    print("6. Salir ")
+    
+    print("========================================================")
+
+
+    def leer_opcion():
+        while True:
+            try:
+                opcion = int(input("Seleccione una opcion: "))
+                if 1 <= opcion <= 6:
+                    return opcion
+                else:
+                    print("Error, ingrese una opcion entre la 1 y la 6")
+            except ValueError:
+                print(" ERROR: Ingrese un numero entero")
+
+
+                def validar_descripcion(descripcion):
+                        return descripcion.strip()!= ""
+                    
+
+                def validar_prioridad(prioridad):
+                        return 1<= prioridad <= 10
+                    
+
+                def validar_tiempo(tiempo):
+                        return tiempo > 0
+                    
+
+                def agregar_tarea(lista):
+                        descripcion = input(" Ingrese una descripcion para su tarea")
+
+                        try: 
+                            prioridad =int(input(" Ingrese prioridad de la tarea ( 1 - 10 )"))
+                            tiempo_aprox = float(input(" Ingrese el tiempo aproximado en horas "))
+                        except ValueError:
+                            print("Error, datos ingresados incorrectamente ")
+                            return 
+                        
+
+                        if not validar_tiempo(tiempo_aprox):
+                            print("Error, el tiempo aproximado no puede ser 0 ")
+                            return 
+                        
+                        tarea =  { "descripcion": descripcion,
+                            "prioridad": prioridad,
+                            "tiempo_aprox":tiempo_aprox,
+                            "completada": False 
+                            }
+                        
+
+                        lista.append(tarea)
+                        print("Tarea ingresada de forma correcta")
+
+
+                        def buscar_tarea(lista, descripcion):
+                            for i in range(len(lista)):
+                                if lista[i]["descripcion"] == descripcion:
+                                    return i
+                                return -1
+                            
+
+                            def eliminar_tarea(lista):
+                                descripcion = input(" Ingrese descripcion de la tarea que desea eliminar ")
+
+                                posicion = buscar_tarea(lista, descripcion)
+
+                                if posicion != 1:
+                                    lista.pop(posicion)
+                                    print("Tarea eliminada de forma correcta")
+                                else:
+                                    print(f"La tarea ´{descripcion}´ no se encuentra en el sistema ")
+                                    def actualizar_estado(lista):
+                                        for tarea in lista:
+                                            if tarea["prioridad"] >= 5:
+                                                tarea["completada"] = True
+                                            else: 
+                                                tarea["compleatada"] = False 
+
+
+                                            def mostrar_tareas(lista):
+                                                actualizar_estado(lista)
+
+                                                if len(lista) == 0:
+                                                    print(" No hay tareas ingresadas ")
+                                                    return 
+                                                
+
+                                                print("=====LISTA DE TAREAS=====")
+
+                                                for tarea in lista:
+                                                    print("Descripcion",tarea["descripcion"])
+                                                    print("Prioridad", tarea["prioridad"] )
+                                                    print("Tiempo ", tiempo_aprox["tiempo_aprox"])
+
+
+                                                    if tarea["completada"]:
+                                                        print(" Estado: COMPLETADA")
+                                                    else: 
+                                                        print("Estado: PENDIENTE")
+                                                        
+                                                        
+                                                        print("*" * 40)
+
+
+                                                        tareas = []
+                                                        while True: 
+                                                            mostrar_menu()
+                                                            opcion = leer_opcion()
+                                                            if opcion == 1: 
+                                                                agregar_tarea(tareas)
+                                                            elif opcion == 2: 
+                                                                descripcion = input("Ingrese la descripción de la tarea a buscar: ")
+                                                                posicion = buscar_tarea(tareas, descripcion)
+
+
+                                                                if posicion != 1:
+                                                                    print(" Tarea encontrada en su posicion", posicion)
+                                                                    print(" Descripcion", tareas[posicion]["descripcion"])
+                                                                    print("Prioridad", tareas [posicion]["prioridad"])
+                                                                    print("Tiempor Aprox", tareas[posicion]["tiempo_aprox"])
+                                                                    print("Completada", tareas[posicion])
+                                                                else: 
+                                                                    print(" Tarea no encontrada ")
+                                                                            
+                                                            elif opcion == 3: 
+                                                                eliminar_tarea(tareas)
+
+                                                            elif opcion == 4:
+                                                                actualizar_estado(tareas)
+                                                                print(" Estado actualizado de forma correcta ")
+
+                                                            elif opcion == 5:
+                                                                mostrar_tareas(tareas)
+                                                            
+                                                            elif opcion == 6:
+                                                                print(" Gracias por usar el sistema. Vuelva pronto")
+                                                                break
+
+
+
